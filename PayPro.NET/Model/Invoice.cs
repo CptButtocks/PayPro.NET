@@ -58,5 +58,26 @@ namespace PayPro.NET.Model
         public string? ReturnUrl { get; set; }
         [JsonPropertyName("vat")]
         public int? VAT { get; set; }
+
+        public CreateInvoiceRequest(int amount, string consumerAddress, string consumerCity, string consumerCountry, string consumerEmail, string consumerPostal, string invoiceMethod)
+        {
+            Amount = amount;
+            ConsumerAddress = consumerAddress;
+            ConsumerCity = consumerCity;
+            ConsumerCountry = consumerCountry;
+            ConsumerEmail = consumerEmail;
+            ConsumerPostal = consumerPostal;
+            InvoiceMethod = invoiceMethod;
+        }
+    }
+
+    public class CreateInvoiceResponse
+    {
+        [JsonPropertyName("sale_id")]
+        public int SaleId { get; set; }
+        [JsonPropertyName("payment_url")]
+        public string PaymentUrl { get; set; } = String.Empty;
+        [JsonPropertyName("payment_hash")]
+        public string PaymentHash { get; set; } = String.Empty;
     }
 }

@@ -15,5 +15,10 @@ namespace PayPro.NET.Model
         public int SequenceNumber { get; set; }
         [JsonPropertyName("amount")]
         public int Amount { get; set; }
+
+        public CreateRefundRequest(int saleId)
+        {
+            SaleId = saleId;
+        }
     }
 }

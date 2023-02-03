@@ -39,7 +39,7 @@ namespace PayPro.NET.Model
         public int ProductId { get; set; }
     }
 
-    public class GetProductResponse : IPaymentBasics
+    public class ProductResponse : IPaymentBasics
     {
         [JsonPropertyName("number_of_periods")]
         public string NumberOfPeriods { get; set; } = String.Empty;

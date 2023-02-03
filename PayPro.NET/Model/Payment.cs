@@ -64,6 +64,11 @@ namespace PayPro.NET.Model
         public bool? TestMode { get; set; }
         [JsonPropertyName("vat")]
         public int? VAT { get; set; }
+
+        public CreatePaymentRequest(int amount)
+        {
+            Amount = amount;
+        }
     }
 
     public class CreatePaymentResponse
@@ -80,6 +85,12 @@ namespace PayPro.NET.Model
         public int ProductId { get; set; }
         [JsonPropertyName("consumer_email")]
         new public string ConsumerEmail { get; set; }
+
+        public CreateProductPaymentRequest(int amount, int productId, string consumerEmail) : base(amount)
+        {
+            ProductId = productId;
+            ConsumerEmail = consumerEmail;
+        }
     }
 
     public class GetPaymentRequest
@@ -88,6 +99,12 @@ namespace PayPro.NET.Model
         public string PaymentHash { get; set; }
         [JsonPropertyName("sale_id")]
         public int SaleId { get; set; }
+
+        public GetPaymentRequest(string paymentHash, int saleId)
+        {
+            PaymentHash = paymentHash;
+            SaleId = saleId;
+        }
     }
 
     public class GetPaymentResposne

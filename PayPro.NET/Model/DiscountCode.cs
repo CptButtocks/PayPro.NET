@@ -11,6 +11,11 @@ namespace PayPro.NET.Model
     {
         [JsonPropertyName("product_id")]
         public int ProductId { get; set; }
+
+        public GetDiscountCodesRequest(int productId)
+        {
+            ProductId = productId;
+        }
     }
 
     public class GetDiscountCodeRequest
@@ -19,6 +24,12 @@ namespace PayPro.NET.Model
         public int ProductId { get; set; }
         [JsonPropertyName("discount_code")]
         public string DiscountCode { get; set; }
+
+        public GetDiscountCodeRequest(int productId, string discountCode)
+        {
+            ProductId = productId;
+            DiscountCode = discountCode;
+        }
     }
 
     public class GetDiscountCodeResponse
