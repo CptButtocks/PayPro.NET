@@ -11,7 +11,7 @@ namespace PayPro.NET.Model
     public class CreatePaymentRequest : IConsumerBasics
     {
         [JsonPropertyName("amount")]
-        int Amount { get; set; }
+        public int Amount { get; set; }
         [JsonPropertyName("affiliate_amount")]
         public string? AffiliateAmount { get; set; }
         [JsonPropertyName("approve_machtiging")]
@@ -51,7 +51,7 @@ namespace PayPro.NET.Model
         [JsonPropertyName("locale")]
         public string? Locale { get; set; }
         [JsonPropertyName("next_direct_debit_date")]
-        public DateTime NextDirectDebitDate { get; set; }
+        public DateTime? NextDirectDebitDate { get; set; }
         [JsonPropertyName("pay_method")]
         public string? PayMethod { get; set; }
         [JsonPropertyName("postback_url")]
@@ -65,9 +65,10 @@ namespace PayPro.NET.Model
         [JsonPropertyName("vat")]
         public int? VAT { get; set; }
 
-        public CreatePaymentRequest(int amount)
+        public CreatePaymentRequest(int amount, string consumerEmail)
         {
             Amount = amount;
+            ConsumerEmail = consumerEmail;
         }
     }
 
@@ -86,7 +87,7 @@ namespace PayPro.NET.Model
         [JsonPropertyName("consumer_email")]
         new public string ConsumerEmail { get; set; }
 
-        public CreateProductPaymentRequest(int amount, int productId, string consumerEmail) : base(amount)
+        public CreateProductPaymentRequest(int amount, int productId, string consumerEmail) : base(amount, consumerEmail)
         {
             ProductId = productId;
             ConsumerEmail = consumerEmail;

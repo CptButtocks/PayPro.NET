@@ -10,6 +10,10 @@ namespace PayPro.NET.Services
     public abstract class PayProService
     {
         private readonly string _apiKey;
+        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions()
+        {
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+        };
         private const string _baseUrl = "https://paypro.nl/post_api";
         public PayProService(string key)
         {
@@ -20,11 +24,12 @@ namespace PayPro.NET.Services
         {
             using (HttpClient client = new HttpClient())
             {
+                string parameterBody = JsonSerializer.Serialize(parameters, options: _serializerOptions);
                 var content = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("apikey", _apiKey),
                     new KeyValuePair<string, string>("command", command),
-                    new KeyValuePair<string, string>("params", JsonSerializer.Serialize(parameters))
+                    new KeyValuePair<string, string>("params", parameterBody)
                 });
 
                 HttpResponseMessage response = await client.PostAsync(_baseUrl, content);
