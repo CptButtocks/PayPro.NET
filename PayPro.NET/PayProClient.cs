@@ -11,6 +11,7 @@ namespace PayPro.NET
         public InvoiceService Invoices { get; }
         public SubscriptionService Subscriptions { get; }
         public DiscountCodeService Discounts { get; }
+        public PaymentMethodService PaymentMethods { get; }
         public PayProClient(string key)
         {
             Payments = new(key);
@@ -19,6 +20,7 @@ namespace PayPro.NET
             Invoices = new(key);
             Subscriptions = new(key);
             Discounts = new(key);
+            PaymentMethods = new(key);
         }
     }
 }
