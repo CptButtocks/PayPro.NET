@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PayPro.NET.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,9 @@ namespace PayPro.NET.Services
 
                 HttpResponseMessage response = await client.PostAsync(_baseUrl, content);
                 string responseString = await response.Content.ReadAsStringAsync();
+                ErrorResponse? errors = JsonSerializer.Deserialize<ErrorResponse>(responseString);
+                if (errors != null && errors.HasErrors)
+                    throw new Exception(errors.Return);
                 T? deserializeObject = JsonSerializer.Deserialize<T>(responseString);
                 if (deserializeObject == null)
                     throw new ArgumentNullException("The resulting object could not be deserialized");
