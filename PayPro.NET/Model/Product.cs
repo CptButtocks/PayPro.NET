@@ -31,6 +31,15 @@ namespace PayPro.NET.Model
         public bool IsEditable { get; set; }
         [JsonPropertyName("goods_type")]
         public string GoodsType { get; set; } = "digital";
+
+        public CreateProductRequest(string title,string url, string description, string returnUrl, int price)
+        {
+            Title = title;
+            Url = url;
+            Description = description;
+            ReturnUrl = returnUrl;
+            Price = price;
+        }
     }
 
     public class GetProductRequest
